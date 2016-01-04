@@ -44,8 +44,8 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var control = __webpack_require__(2)()
-	  , recording = __webpack_require__(1)(control)
+	var control = __webpack_require__(1)()
+	  , recording = __webpack_require__(3)(control)
 	  , output = __webpack_require__(4)(control)
 	  ;
 
@@ -63,6 +63,7 @@
 
 	recording.onstart = function () {
 	  output.clear();
+	  output.buffering();
 	};
 
 	recording.begin();
@@ -70,93 +71,16 @@
 
 /***/ },
 /* 1 */
-/***/ function(module, exports) {
-
-	var recording = function (control) {
-	  var me
-	    , control
-	    , mediaRecorder = null
-	    , errBack = function (error) { console.log("Video capture error: ", error.code); }
-	    ;
-
-	  return me = {
-	    begin: function () {
-	      var videoObj = { video: true }
-	        ;
-
-	      if (navigator.getUserMedia) { // Standard
-	        navigator.getUserMedia(videoObj, function(stream) {
-	          mediaRecorder = new MediaStreamRecorder(stream);
-	          mediaRecorder.mimeType = 'video/webm';
-	          me.setup();
-
-	          mediaRecorder.ondataavailable = function (blob) {
-	            me.ondataavailable(blob);
-	          };
-
-	          me.start();
-	        }, function () { me.error(arguments); });
-	      } else {
-	        me.onerror();
-	      }
-
-	      me.begin = me.start;
-	    }
-
-	  , stop: function () {
-	      if (!mediaRecorder) { return; }
-	      mediaRecorder.stop();
-	    }
-
-	  , setup: function () {
-	      if (!mediaRecorder) { return; }
-	      mediaRecorder.width = control.get('width');
-	      mediaRecorder.height = control.get('height');
-	    }
-
-	  , start: function () {
-	      if (!mediaRecorder) { return; }
-	      mediaRecorder.start(control.get('delay'));
-	      me.onstart();
-	    }
-
-	  , onstart: function () { }
-
-	  , reset: function () {
-	      me.stop();
-	      me.setup();
-	      me.start();
-	    }
-
-	  , ondataavailable: function (blob) {}
-
-	  , onerror: function () {}
-	  };
-	};
-
-	var videoObj = { "video": true }
-	  , errBack = function (error) {
-	      console.log("Video capture error: ", error.code);
-	    }
-	  ;
-
-	module.exports = recording;
-
-
-/***/ },
-/* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var $ = __webpack_require__(3);
+	var $ = __webpack_require__(2);
 
 	var control = function () {
 	  var me
 	    , $form = $('#control')
-	    , attrs = {}
+	    , attrs = { width: 640, height: 480 }
 	    , readAttrs = function () {
 	        attrs.delay = $form.find('[name=delay]').val() * 1000;
-	        attrs.width = $form.find('[name=width]').val();
-	        attrs.height = $form.find('[name=height]').val();
 	      }
 	    ;
 
@@ -174,13 +98,15 @@
 	    me.onChange();
 	  });
 
-	  $form.on('click', '.js-fill-screen', function (e) {
-	    e.preventDefault();
-	    attrs.width = $('body').width();
-	    attrs.height = $('body').height();
+	  $form.on('click', '[data-set-width]', function (e) {
+	    var width = $(this).data().setWidth
+	      , height = $(this).data().setHeight
+	      ;
 
-	    $form.find('[name=width]').val(attrs.width);
-	    $form.find('[name=height]').val(attrs.height);
+	    e.preventDefault();
+
+	    attrs.width = width;
+	    attrs.height = height;
 
 	    me.onChange();
 	  });
@@ -193,7 +119,7 @@
 
 
 /***/ },
-/* 3 */
+/* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -9409,10 +9335,85 @@
 
 
 /***/ },
+/* 3 */
+/***/ function(module, exports) {
+
+	var recording = function (control) {
+	  var me
+	    , control
+	    , mediaRecorder = null
+	    , errBack = function (error) { console.log("Video capture error: ", error.code); }
+	    ;
+
+	  return me = {
+	    begin: function () {
+	      var videoObj = { video: true }
+	        ;
+
+	      if (navigator.getUserMedia) { // Standard
+	        navigator.getUserMedia(videoObj, function(stream) {
+	          mediaRecorder = new MediaStreamRecorder(stream);
+	          mediaRecorder.mimeType = 'video/webm';
+	          me.setup();
+
+	          mediaRecorder.ondataavailable = function (blob) {
+	            me.ondataavailable(blob);
+	          };
+
+	          me.start();
+	        }, function () { me.error(arguments); });
+	      } else {
+	        me.onerror();
+	      }
+
+	      me.begin = me.start;
+	    }
+
+	  , stop: function () {
+	      if (!mediaRecorder) { return; }
+	      mediaRecorder.stop();
+	    }
+
+	  , setup: function () {
+	      if (!mediaRecorder) { return; }
+	      mediaRecorder.width = control.get('width');
+	      mediaRecorder.height = control.get('height');
+	    }
+
+	  , start: function () {
+	      if (!mediaRecorder) { return; }
+	      mediaRecorder.start(control.get('delay'));
+	      me.onstart();
+	    }
+
+	  , onstart: function () { }
+
+	  , reset: function () {
+	      me.stop();
+	      me.setup();
+	      me.start();
+	    }
+
+	  , ondataavailable: function (blob) {}
+
+	  , onerror: function () {}
+	  };
+	};
+
+	var videoObj = { "video": true }
+	  , errBack = function (error) {
+	      console.log("Video capture error: ", error.code);
+	    }
+	  ;
+
+	module.exports = recording;
+
+
+/***/ },
 /* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var $ = __webpack_require__(3);
+	var $ = __webpack_require__(2);
 
 	var output = function (control) {
 	  var me
@@ -9420,6 +9421,7 @@
 	    , templateText = "<video class='video' width='WIDTHpx' height='HEIGHTpx' src='URL'></video>"
 	    , $curr
 	    , $prev
+	    , buffering = false
 	    ;
 
 	  return me = {
@@ -9429,6 +9431,11 @@
 	        , $rem = $prev
 	        ;
 
+	      if (buffering) {
+	        buffering = false;
+	        $el.html('');
+	      }
+
 	      out = out.replace(/WIDTH/, control.get('width'));
 	      out = out.replace(/HEIGHT/, control.get('height'));
 	      out = out.replace(/URL/, blobUrl);
@@ -9436,6 +9443,7 @@
 	      $prev = $curr;
 	      $curr = $(out);
 	      $el.append($curr);
+	      $el.css({ width: control.get('width'), height: control.get('height') });
 	      $curr.get(0).play();
 	      $rem && $rem.remove();
 	    }
@@ -9447,7 +9455,13 @@
 	  , clear: function () {
 	      $curr && $curr.remove();
 	      $prev && $prev.remove();
+	      $el.css({ width: control.get('width'), height: control.get('height') });
 	      $el.html('');
+	    }
+
+	  , buffering: function () {
+	      buffering = true;
+	      $el.html('Buffering...');
 	    }
 	  };
 	};

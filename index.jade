@@ -2,23 +2,57 @@ doctype html
 
 html
   head
+    title Delayed Mirror
+    meta(name='description' content='Use a slightly delayed video to practice dance, gymnastics, and martial arts drills')
+    link(rel='stylesheet' href='node_modules/bootstrap/dist/css/bootstrap.min.css')
     link(rel='stylesheet' href='css/style.css')
   body
-    form(id='control')
-      label Delay
-      input(name='delay' type='number' min=1 max=20 step=1 value=5)
-      label Width
-      input(name='width' type='number' min=320 step=1 value=640)
-      label Height
-      input(name='height' type='number' min=240 step=1 value=480)
-      button(type='button' class='js-fill-screen').
-        Fill Screen
-      input(type='submit')
+    nav.navbar.navbar-default
+      a.navbar-brand Delayed Mirror
 
-    div#output.video-container.
-      Loading... Please allow access to your camera.
+    .container
+      form.form-inline(id='control')
+        .form-group
+          label(for='delay') Delay
+          input.form-control(name='delay' type='number' min=1 max=20 step=1 value=5)
+        input.btn.btn-default(type='submit')
 
-    script(type='text/javascript' src='lib/MediaStreamRecorder.js')
+        ul.spaced-list
+          li
+            a(data-set-width=320 data-set-height=240 href='#') 320x240
+          li
+            a(data-set-width=640 data-set-height=480 href='#') 640x480
+          li
+            a(data-set-width=800 data-set-height=600 href='#') 800x600
+          li
+            a(data-set-width=1024 data-set-height=786 href='#') 1024x786
+
+      .clear
+      div#output.video-container.
+        Loading... Please allow access to your camera.
+
+      h1 Delayed Mirror
+      p.
+        A delayed mirror is a nice tool for practicing movement. It's near-realtime feedback that's useful for
+        practicing movements that are impossible or impractical to watch in a mirror.
+
+      p.
+        See what your coach sees, and make corrections to your form and technique. Dance drills, gymnastics drills,
+        and martial arts drills can all be improved with this helpful feedback.
+
+      p.
+
+      h2 Privacy
+      p.
+        The video on this website is never stored, and never sent to a server. It is simply held in memory on your
+        device just long enough to replay it, and then destroyed.
+
+      p.
+        Delayed Mirror is also open source and transparent.
+        <a href='https://github.com/wheeyls/delayed-mirror'>View and make changes to the source yourself</a>
+        if you'd like to spin up your own server, or request a change in functionality.
+
+    script(type='text/javascript' src='node_modules/msr/MediaStreamRecorder.min.js')
     script(type='text/javascript' src='js/bundle.js')
 
     script(type='text/javascript').

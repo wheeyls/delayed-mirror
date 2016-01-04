@@ -4,6 +4,8 @@
   "description": "Use WebRTC to show short delay on video; useful for training purposes.",
   "main": "index.html",
   "dependencies": {
+    "bootstrap": "^3.3.6",
+    "msr": "^1.2.9"
   },
   "devDependencies": {
     "jade": "^1.11.0",

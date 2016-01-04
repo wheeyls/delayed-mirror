@@ -1,3 +1,35 @@
+ul.spaced-list {
+  margin:  0;
+  padding:  0;
+  list-style: none;
+}
+
+.clear {
+  clear: both;
+}
+
+.spaced-list > li {
+  float: left;
+  position: relative;
+  list-style: none;
+  padding-left: 16px;
+}
+
+.spaced-list > li:before {
+  content: '';
+  width: 1px;
+  background: $body-color;
+}
+
+.spaced-list  > li:first-child {
+  padding-left: 0;
+}
+
+.spaced-list  > li:first-child:before {
+  display: none;
+}
+
+
 .video-container {
   position: relative;
 }
