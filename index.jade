@@ -31,31 +31,34 @@ html
       div#output.video-container.
         Loading... Please allow access to your camera.
 
-      h1 Delayed Mirror
-      p.
-        A delayed mirror is a nice tool for practicing movement. It's near-realtime feedback that's useful for
-        practicing movements that are impossible or impractical to watch in a mirror.
+      .row
+        .col-md-8
+          h1 Delayed Mirror
+          p.
+            A delayed mirror is a nice tool for practicing movement. It's near-realtime feedback that's useful for
+            practicing movements that are impossible or impractical to watch in a mirror.
 
-      p.
-        See what your coach sees, and make corrections to your form and technique. Dance drills, gymnastics drills,
-        and martial arts drills can all be improved with this helpful feedback.
+          p.
+            See what your coach sees, and make corrections to your form and technique. Dance drills, gymnastics drills,
+            and martial arts drills can all be improved with this helpful feedback.
 
-      p.
+          p.
 
-      h2 Privacy
-      p.
-        The video on this website is never stored, and never sent to a server. It is simply held in memory on your
-        device just long enough to replay it, and then destroyed.
+          h2 Privacy
+          p.
+            The video on this website is never stored, and never sent to a server. It is simply held in memory on your
+            device just long enough to replay it, and then destroyed.
 
-      p.
-        Delayed Mirror is also open source and transparent.
-        <a href='https://github.com/wheeyls/delayed-mirror'>View and make changes to the source yourself</a>
-        if you'd like to spin up your own server, or request a change in functionality.
+          p.
+            Delayed Mirror is also open source and transparent.
+            <a href='https://github.com/wheeyls/delayed-mirror'>View and make changes to the source yourself</a>
+            if you'd like to spin up your own server, or request a change in functionality.
 
-      script(async=true src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js")
-      ins(class="adsbygoogle" style="display:block" data-ad-client="#{process.env.DELAYED_AD_CLIENT}" data-ad-slot="#{process.env.DELAYED_AD_SLOT}" data-ad-format="auto")
-      script.
-        (adsbygoogle = window.adsbygoogle || []).push({});
+        .col-md-4
+          script(async=true src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js")
+          ins(class="adsbygoogle" style="display:block" data-ad-client="#{process.env.DELAYED_AD_CLIENT}" data-ad-slot="#{process.env.DELAYED_AD_SLOT}" data-ad-format="auto")
+          script.
+            (adsbygoogle = window.adsbygoogle || []).push({});
 
     script(type='text/javascript' src='node_modules/msr/MediaStreamRecorder.min.js')
     script(type='text/javascript' src='js/bundle.js')
