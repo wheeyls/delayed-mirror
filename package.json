@@ -4,15 +4,14 @@
   "description": "Use WebRTC to show short delay on video; useful for training purposes.",
   "main": "index.html",
   "dependencies": {
-    "webpack": "^1.12.9",
-    "webpack-dev-server": "^1.14.0"
   },
   "devDependencies": {
+    "jade": "^1.11.0",
     "webpack": "^1.12.9",
     "webpack-dev-server": "^1.14.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "./node_modules/jade/bin/jade.js index.jade"
   },
   "keywords": [
     "webrtc",
