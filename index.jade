@@ -52,6 +52,11 @@ html
         <a href='https://github.com/wheeyls/delayed-mirror'>View and make changes to the source yourself</a>
         if you'd like to spin up your own server, or request a change in functionality.
 
+      script(async=true src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js")
+      ins(class="adsbygoogle" style="display:block" data-ad-client="#{process.env.DELAYED_AD_CLIENT}" data-ad-slot="#{process.env.DELAYED_AD_SLOT}" data-ad-format="auto")
+      script.
+        (adsbygoogle = window.adsbygoogle || []).push({});
+
     script(type='text/javascript' src='node_modules/msr/MediaStreamRecorder.min.js')
     script(type='text/javascript' src='js/bundle.js')
 
