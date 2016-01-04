@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <link rel='stylesheet' href='css/style.css' />
+  </head>
+  <body>
+    <form id='control'>
+      <label>Delay</label>
+      <input name='delay' type='number' min=1 max=20 step=1 value=5 />
+      <label>Width</label>
+      <input name='width' type='number' min=320 step=1 value=640 />
+      <label>Height</label>
+      <input name='height' type='number' min=240 step=1 value=480 />
+      <button type='button' class='js-fill-screen'>Fill Screen</button>
+      <input type='submit'>
+
+    </form>
+    <div id="output" class='video-container'>Loading... Please allow access to your camera.</div>
+    <script type='text/javascript' src='lib/MediaStreamRecorder.js'></script>
+    <script type='text/javascript' src='js/bundle.js'></script>
+  </body>
+</html>

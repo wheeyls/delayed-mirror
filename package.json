@@ -1,0 +1,28 @@
+{
+  "name": "delayed-mirror",
+  "version": "1.0.0",
+  "description": "Use WebRTC to show short delay on video; useful for training purposes.",
+  "main": "index.html",
+  "dependencies": {
+    "webpack": "^1.12.9",
+    "webpack-dev-server": "^1.14.0"
+  },
+  "devDependencies": {
+    "webpack": "^1.12.9",
+    "webpack-dev-server": "^1.14.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "webrtc",
+    "mediastream",
+    "mediastreamrecorder",
+    "delayed-mirror",
+    "dancing",
+    "capoeira",
+    "gymnastics"
+  ],
+  "author": "Michael Wheeler",
+  "license": "ISC"
+}
