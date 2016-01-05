@@ -30,18 +30,52 @@ html
       div#output.video-container.
         Loading... Please allow access to your camera.
 
-      .row
+      .row.body-content
         .col-md-8
-          h1 Delayed Mirror
+          .jumbotron
+            h1 Delayed Mirror
+            p.
+              A delayed mirror is a nice tool for practicing movement. I use it to get near-realtime feedback when
+              practicing movements that are impossible or impractical to watch in a mirror.
+
+            p.
+              Use this tool to see what your coach sees, and make corrections to your form and technique. Dance drills, gymnastics drills,
+              and martial arts drills - any sort of technical practice - can all be improved with this helpful feedback.
+
+          h3 Privacy
           p.
-            A delayed mirror is a nice tool for practicing movement. It's near-realtime feedback that's useful for
-            practicing movements that are impossible or impractical to watch in a mirror.
+            The video on this website is never stored, and never sent to a server. It is simply held in memory on your
+            device just long enough to replay it, and then destroyed.
 
           p.
-            See what your coach sees, and make corrections to your form and technique. Dance drills, gymnastics drills,
-            and martial arts drills can all be improved with this helpful feedback.
+            Delayed Mirror is also open source and transparent.
+            <a href='https://github.com/wheeyls/delayed-mirror'>View and make changes to the source yourself</a>
+            if you'd like to spin up your own server, or request a change in functionality.
+
+          h3 About
+          ul.spaced-list
+            li
+              a(href='https://github.com/wheeyls/delayed-mirror') GitHub
+            li
+              a(href='mailto:mt.maui@gmail.com') Contact
+            li
+              a(href='http://hacki.ly') Blog
+
+        .col-md-4
+          script(async=true src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js")
+          ins(class="adsbygoogle" style="display:block" data-ad-client="#{process.env.DELAYED_AD_CLIENT}" data-ad-slot="#{process.env.DELAYED_AD_SLOT}" data-ad-format="auto")
+          script.
+            (adsbygoogle = window.adsbygoogle || []).push({});
+
+    script#error-message(type='text/template')
+      .panel.panel-default
+        .panel-body
+          .alert.alert-danger(role='alert') We're sorry, there was an error getting access to your camera.
 
           h3 Support
+          p.
+            Sometimes <a href='#' onclick='window.location.reload();'>refreshing your browser</a> can solve the problem.
+
           p.
             This website uses relatively new browser features to gain access to the camera, and is not supported on all devices.
           p.
@@ -60,23 +94,6 @@ html
             li Firefox
             li Opera
             li Some Android Browsers (not all versions)
-
-
-          h3 Privacy
-          p.
-            The video on this website is never stored, and never sent to a server. It is simply held in memory on your
-            device just long enough to replay it, and then destroyed.
-
-          p.
-            Delayed Mirror is also open source and transparent.
-            <a href='https://github.com/wheeyls/delayed-mirror'>View and make changes to the source yourself</a>
-            if you'd like to spin up your own server, or request a change in functionality.
-
-        .col-md-4
-          script(async=true src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js")
-          ins(class="adsbygoogle" style="display:block" data-ad-client="#{process.env.DELAYED_AD_CLIENT}" data-ad-slot="#{process.env.DELAYED_AD_SLOT}" data-ad-format="auto")
-          script.
-            (adsbygoogle = window.adsbygoogle || []).push({});
 
     script(type='text/javascript' src='node_modules/msr/MediaStreamRecorder.min.js')
     script(type='text/javascript' src='js/bundle.js')

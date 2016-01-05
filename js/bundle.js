@@ -9372,7 +9372,7 @@
 	          };
 
 	          me.start();
-	        }, function () { me.error(arguments); });
+	        }, function () { me.onerror(arguments); });
 	      } else {
 	        me.onerror();
 	      }
@@ -9460,7 +9460,8 @@
 	    }
 
 	  , showError: function () {
-	      $el.html('<h2 class="error">We\'re sorry there was an error; could not access the camera on this device.</h2>');
+	      var output = $('#error-message').html();
+	      $el.html(output);
 	    }
 
 	  , clear: function () {
