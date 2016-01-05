@@ -13,9 +13,8 @@ html
     .container
       form.form-inline(id='control')
         .form-group
-          label(for='delay') Delay
+          label(for='delay') Change Delay
           input.form-control(name='delay' type='number' min=1 max=20 step=1 value=5)
-        input.btn.btn-default(type='submit')
 
         ul.spaced-list
           li
@@ -42,9 +41,28 @@ html
             See what your coach sees, and make corrections to your form and technique. Dance drills, gymnastics drills,
             and martial arts drills can all be improved with this helpful feedback.
 
+          h3 Support
           p.
+            This website uses relatively new browser features to gain access to the camera, and is not supported on all devices.
+          p.
+            It <strong>will not work</strong> on:
 
-          h2 Privacy
+          ul
+            li Internet Explorer
+            li Safari
+            li iOS
+
+          p.
+            It <strong>has been tested successfully</strong> on:
+
+          ul
+            li Chrome
+            li Firefox
+            li Opera
+            li Some Android Browsers (not all versions)
+
+
+          h3 Privacy
           p.
             The video on this website is never stored, and never sent to a server. It is simply held in memory on your
             device just long enough to replay it, and then destroyed.

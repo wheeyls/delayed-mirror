@@ -47,19 +47,25 @@
 	var control = __webpack_require__(1)()
 	  , recording = __webpack_require__(3)(control)
 	  , output = __webpack_require__(4)(control)
+	  , buffer = __webpack_require__(5)(control.get('delay'))
 	  ;
 
 	control.onChange = function () {
+	  buffer.setSize(control.get('delay'));
 	  recording.reset();
 	};
 
 	recording.ondataavailable = function (blob) {
-	  output.showNext(blob);
+	  buffer.add(blob);
 	};
 
 	recording.onerror = function () {
 	  output.showError();
 	};
+
+	buffer.onTick(function (blob) {
+	  blob && output.showNext(blob);
+	});
 
 	recording.onstart = function () {
 	  output.clear();
@@ -80,7 +86,7 @@
 	    , $form = $('#control')
 	    , attrs = { width: 640, height: 480 }
 	    , readAttrs = function () {
-	        attrs.delay = $form.find('[name=delay]').val() * 1000;
+	        attrs.delay = $form.find('[name=delay]').val();
 	      }
 	    ;
 
@@ -96,6 +102,10 @@
 	    e.preventDefault();
 	    readAttrs();
 	    me.onChange();
+	  });
+
+	  $form.on('change', 'input', function (e) {
+	    $form.submit();
 	  });
 
 	  $form.on('click', '[data-set-width]', function (e) {
@@ -9354,6 +9364,7 @@
 	        navigator.getUserMedia(videoObj, function(stream) {
 	          mediaRecorder = new MediaStreamRecorder(stream);
 	          mediaRecorder.mimeType = 'video/webm';
+	          mediaRecorder.bitsPerSecond = 12800;
 	          me.setup();
 
 	          mediaRecorder.ondataavailable = function (blob) {
@@ -9382,7 +9393,7 @@
 
 	  , start: function () {
 	      if (!mediaRecorder) { return; }
-	      mediaRecorder.start(control.get('delay'));
+	      mediaRecorder.start(1000);
 	      me.onstart();
 	    }
 
@@ -9467,6 +9478,64 @@
 	};
 
 	module.exports = output;
+
+
+/***/ },
+/* 5 */
+/***/ function(module, exports) {
+
+	var buffer = function (size) {
+	  var me
+	    , list
+	    , callbacks = []
+	    , emit
+	    ;
+
+	  emit = function (item) {
+	    var i, ii;
+
+	    console.log('tick', item, list);
+	    for (i = 0, ii = callbacks.length; i < ii; i += 1) {
+	      callbacks[i](item);
+	    }
+	  }
+
+	  me = {
+	    next: function () {
+	      return list.shift();
+	    }
+
+	  , reset: function () {
+	      var i;
+	      list = new Array(size);
+	    }
+
+	  , add: function (item) {
+	      console.log('add', item, list);
+	      list.push(item);
+
+	      while (list.length >= size) {
+	        emit(me.next());
+	      }
+	    }
+
+	  , setSize: function (val) {
+	      console.log('setting', val);
+	      size = parseInt(val, 10);
+	      me.reset();
+	    }
+
+	  , onTick: function (callback) {
+	      callbacks.push(callback);
+	    }
+	  };
+
+	  me.setSize(size);
+
+	  return me;
+	};
+
+	module.exports = buffer;
 
 
 /***/ }
